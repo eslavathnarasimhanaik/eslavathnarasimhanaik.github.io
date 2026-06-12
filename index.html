@@ -97,6 +97,39 @@
           "addressRegion": "Telangana",
           "addressCountry": "India"
         },
+        "alumniOf": [
+          {
+            "@type": "EducationalOrganization",
+            "name": "Malla Reddy College of Engineering and Technology (MRCET)",
+            "url": "https://mrcet.com",
+            "location": {
+              "@type": "PostalAddress",
+              "addressLocality": "Hyderabad",
+              "addressRegion": "Telangana",
+              "addressCountry": "India"
+            }
+          },
+          {
+            "@type": "EducationalOrganization",
+            "name": "Sri Chaitanya Junior College, Khammam",
+            "location": {
+              "@type": "PostalAddress",
+              "addressLocality": "Khammam",
+              "addressRegion": "Telangana",
+              "addressCountry": "India"
+            }
+          },
+          {
+            "@type": "EducationalOrganization",
+            "name": "Dr. K.K.R's Gowtham International School, Gudavalli",
+            "location": {
+              "@type": "PostalAddress",
+              "addressLocality": "Gudavalli",
+              "addressRegion": "Andhra Pradesh",
+              "addressCountry": "India"
+            }
+          }
+        ],
         "sameAs": [
           "https://www.linkedin.com/in/eslavathnarasimhanaik",
           "https://github.com/eslavathnarasimhanaik",
@@ -107,7 +140,8 @@
           "https://in.pinterest.com/eslavathnarasimhanaik/",
           "https://www.extrape.com/invite/W2OD9",
           "https://eslavathnarasimhanaik.blogspot.com/",
-          "https://naikaa.me/"
+          "https://naikaa.me/",
+          "https://eslavathnarasimhanaik.github.io/"
         ],
         "knowsAbout": [
           "Java",
@@ -519,6 +553,228 @@
     .tech-tag.react { background: rgba(59, 130, 246, 0.1); border-color: rgba(59, 130, 246, 0.2); color: #60a5fa; }
     .tech-tag.db { background: rgba(168, 85, 247, 0.1); border-color: rgba(168, 85, 247, 0.2); color: #c084fc; }
 
+    /* Interactive Card Slip */
+    .edu-container {
+      margin-bottom: 2.5rem;
+    }
+    
+    .flip-card {
+      background-color: transparent;
+      width: 100%;
+      height: 380px;
+      perspective: 1000px;
+      cursor: pointer;
+    }
+
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: left;
+      transition: transform 0.8s;
+      transform-style: preserve-3d;
+    }
+
+    .flip-card:hover .flip-card-inner,
+    .flip-card.active .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .flip-card-front, .flip-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      border-radius: 16px;
+      border: 1px solid var(--card-border);
+      background: linear-gradient(135deg, rgba(22, 28, 45, 0.6) 0%, rgba(8, 10, 16, 0.75) 100%);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+    }
+
+    .flip-card-front::before, .flip-card-back::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.05) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .flip-card-back {
+      transform: rotateY(180deg);
+      background: linear-gradient(135deg, rgba(13, 27, 42, 0.85) 0%, rgba(5, 12, 22, 0.95) 100%);
+      border-color: rgba(59, 130, 246, 0.25);
+    }
+
+    .card-header-slip {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.15);
+      padding-bottom: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .card-logo-area {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .college-logo-bullet {
+      width: 12px;
+      height: 12px;
+      background: var(--accent-primary);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--accent-primary);
+    }
+
+    .college-title-text {
+      font-family: var(--font-heading);
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: #93c5fd;
+      text-transform: uppercase;
+    }
+
+    .batch-badge-slip {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--accent-secondary);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+    }
+
+    .card-body-slip {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1rem;
+      flex-grow: 1;
+    }
+
+    .student-info-grid {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      column-gap: 1.25rem;
+      row-gap: 0.5rem;
+      align-content: center;
+    }
+
+    .info-lbl {
+      font-family: var(--font-heading);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .info-val {
+      font-size: 0.9rem;
+      color: #f3f4f6;
+      font-weight: 500;
+    }
+
+    .info-val.highlight {
+      color: var(--accent-primary);
+      font-weight: 600;
+    }
+
+    .card-photo-box {
+      width: 90px;
+      height: 110px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.03);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+    }
+
+    .card-photo-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .card-footer-slip {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 0.75rem;
+      margin-top: 0.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .sub-education-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.8rem;
+      color: #d1d5db;
+    }
+
+    .sub-education-badge .icon {
+      font-size: 0.95rem;
+      opacity: 0.85;
+    }
+
+    .card-collage-back {
+      width: 100%;
+      height: 160px;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      margin-top: 0.5rem;
+      position: relative;
+    }
+
+    .card-collage-back img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.85) contrast(1.1);
+    }
+
+    .radar-sweep-animation {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.2) 0%, transparent 70%);
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      animation: radarPulse 2.5s infinite ease-out;
+    }
+
+    @keyframes radarPulse {
+      0% {
+        transform: translate(-50%, -50%) scale(0.6);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translate(-50%, -50%) scale(1.6);
+        opacity: 0;
+      }
+    }
+
     /* Skills Grid */
     .skills-section .glass-card {
       padding: 1.5rem;
@@ -731,6 +987,92 @@
         <p class="intro-text">
           I am a dedicated <strong>Software Developer</strong> specializing in building scalable backend services, RESTful APIs, and responsive frontends. Experienced in Java and Spring Boot, I strive to design applications with robust architecture and optimal database management. Actively seeking professional opportunities where I can deliver solid engineering value and collaborate on creative software solutions.
         </p>
+      </div>
+    </section>
+
+    <!-- Academic Profile Slip & Collage Section -->
+    <section class="edu-container">
+      <h2>Academic Profile Slip</h2>
+      <div class="flip-card" onclick="this.classList.toggle('active')">
+        <div class="flip-card-inner">
+          
+          <!-- Front Side: Student Bio Data -->
+          <div class="flip-card-front">
+            <div class="card-header-slip">
+              <div class="card-logo-area">
+                <div class="college-logo-bullet"></div>
+                <span class="college-title-text">MRCET Campus</span>
+              </div>
+              <span class="batch-badge-slip">B.Tech CSE | 2023-2027</span>
+            </div>
+            
+            <div class="card-body-slip">
+              <div class="student-info-grid">
+                <div class="info-lbl">Institution</div>
+                <div class="info-val">Malla Reddy College of Engineering &amp; Technology</div>
+                
+                <div class="info-lbl">Student Name</div>
+                <div class="info-val highlight">Eslavath Narasimha Naik</div>
+                
+                <div class="info-lbl">Branch / CSE</div>
+                <div class="info-val">Computer Science &amp; Engineering</div>
+                
+                <div class="info-lbl">Caste / Age</div>
+                <div class="info-val">Category: ST | Age: 22 Years</div>
+                
+                <div class="info-lbl">Academic Status</div>
+                <div class="info-val">Active Batch (2023 - 2027)</div>
+              </div>
+              
+              <div class="card-photo-box">
+                <img src="https://avatars.githubusercontent.com/u/164381248?v=4" alt="Eslavath Narasimha Naik Photo" />
+              </div>
+            </div>
+            
+            <div class="card-footer-slip">
+              <div class="sub-education-badge">
+                <span class="icon">🏫</span>
+                <span><strong>Intermediate:</strong> Sri Chaitanya Junior College, Khammam</span>
+              </div>
+              <div class="sub-education-badge">
+                <span class="icon">🎓</span>
+                <span><strong>Schooling:</strong> Dr. K.K.R's Gowtham International School, Gudavalli</span>
+              </div>
+              <div style="font-size: 0.7rem; color: var(--accent-primary); text-align: right; margin-top: 0.25rem;">
+                💡 Click or Hover Card to View Map &amp; Routes
+              </div>
+            </div>
+          </div>
+          
+          <!-- Back Side: Geographical Route & Map Collage -->
+          <div class="flip-card-back">
+            <div class="card-header-slip">
+              <div class="card-logo-area">
+                <div class="college-logo-bullet" style="background: var(--accent-secondary); box-shadow: 0 0 8px var(--accent-secondary);"></div>
+                <span class="college-title-text" style="color: #6ee7b7;">Route Map &amp; Location</span>
+              </div>
+              <span class="batch-badge-slip" style="background: rgba(59, 130, 246, 0.15); color: var(--accent-primary); border-color: rgba(59, 130, 246, 0.25);">SARVARAM, IN-TG</span>
+            </div>
+            
+            <div class="card-body-slip" style="display: flex; flex-direction: column; gap: 0.5rem; justify-content: flex-start;">
+              <div style="font-size: 0.85rem; color: #e5e7eb; line-height: 1.4;">
+                📍 <strong>Permanent Location:</strong> Sarvaram, Saravram, Kothagudem, Telangana (507120)<br/>
+                🎯 <strong>GEO Targets:</strong> Region IN-TG | ICBM: 17.554019, 80.617638
+              </div>
+              
+              <div class="card-collage-back">
+                <img src="academic_map_collage.png" alt="MRCET, Gudavalli, Khammam, and Kothagudem Route Collage" />
+                <div class="radar-sweep-animation"></div>
+              </div>
+            </div>
+            
+            <div class="card-footer-slip" style="border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 0.5rem; display: flex; flex-direction: row; justify-content: space-between; align-items: center;">
+              <span style="font-size: 0.75rem; color: var(--text-muted);">© 2026 Eslavath Narasimha Naik</span>
+              <span style="font-size: 0.75rem; color: var(--accent-secondary); font-weight: 600;">PRO SEO, GEO, AEO Verified</span>
+            </div>
+          </div>
+          
+        </div>
       </div>
     </section>
 
