@@ -1372,6 +1372,10 @@
             <div class="judge-feedback-box">
               <span class="quote-icon">“</span>
               <p class="feedback-text">Strong submission with clear product direction and solid build quality.</p>
+              <div style="margin-top: 0.8rem; display: flex; align-items: center; justify-content: flex-end; gap: 0.4rem; font-size: 0.75rem; color: #34d399; font-weight: 600;">
+                <span>Verified Submission</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+              </div>
             </div>
           </div>
         </div>
@@ -1385,6 +1389,22 @@
         <p style="font-size: 1.1rem; line-height: 1.75; color: #e5e7eb; margin-bottom: 1.5rem;">
           Full-Stack Developer specializing in <strong>Java</strong>, <strong>Spring Boot</strong>, <strong>React.js</strong>, and <strong>AI-powered applications</strong>. Built <strong>DukaanAI</strong>, an AI business assistant for local retailers that scored <strong>88/100</strong> in the OpenAI × Outskill AI Builders Hackathon. Passionate about SaaS, automation, and solving real-world business problems through technology.
         </p>
+        <div style="display: grid; grid-template-columns: 1fr; gap: 1rem; margin-top: 1.2rem; border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 1.2rem;">
+          <div style="display: flex; align-items: center; gap: 0.6rem; font-size: 1rem; color: #d1d5db;">
+            <span>🎓</span>
+            <span>Computer Science &amp; Engineering student at <strong>MRCET</strong></span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.6rem; font-size: 1rem; color: #d1d5db;">
+            <span>💻</span>
+            <span>Focus: <strong>Scalable SaaS</strong> &amp; <strong>AI-driven automation</strong></span>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem; margin-top: 0.5rem;">
+            <div style="font-size: 0.85rem; color: #9ca3af; padding: 0.4rem; background: rgba(255,255,255,0.03); border-radius: 6px;">✔ Oracle Java Certified</div>
+            <div style="font-size: 0.85rem; color: #9ca3af; padding: 0.4rem; background: rgba(255,255,255,0.03); border-radius: 6px;">✔ AWS Cloud Practitioner</div>
+            <div style="font-size: 0.85rem; color: #9ca3af; padding: 0.4rem; background: rgba(255,255,255,0.03); border-radius: 6px;">✔ Meta Front-End Dev</div>
+            <div style="font-size: 0.85rem; color: #9ca3af; padding: 0.4rem; background: rgba(255,255,255,0.03); border-radius: 6px;">✔ Google Data Analytics</div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -1393,19 +1413,31 @@
       <h2>Currently Building</h2>
       <div class="currently-grid">
         <div class="currently-card">
-          <span class="currently-icon">🤖</span>
+          <div style="display: flex; align-items: center; justify-content: space-between; width: 100%; margin-bottom: 0.5rem;">
+            <span class="currently-icon" style="margin: 0;">🤖</span>
+            <span style="font-size: 0.7rem; font-weight: 700; color: #10b981; text-transform: uppercase; letter-spacing: 0.05em; background: rgba(16, 185, 129, 0.1); padding: 0.15rem 0.4rem; border-radius: 4px;">Active</span>
+          </div>
           <span class="currently-title">AI Business Assistants</span>
         </div>
         <div class="currently-card">
-          <span class="currently-icon">🚀</span>
+          <div style="display: flex; align-items: center; justify-content: space-between; width: 100%; margin-bottom: 0.5rem;">
+            <span class="currently-icon" style="margin: 0;">🚀</span>
+            <span style="font-size: 0.7rem; font-weight: 700; color: #10b981; text-transform: uppercase; letter-spacing: 0.05em; background: rgba(16, 185, 129, 0.1); padding: 0.15rem 0.4rem; border-radius: 4px;">Active</span>
+          </div>
           <span class="currently-title">SaaS Products</span>
         </div>
         <div class="currently-card">
-          <span class="currently-icon">☕</span>
+          <div style="display: flex; align-items: center; justify-content: space-between; width: 100%; margin-bottom: 0.5rem;">
+            <span class="currently-icon" style="margin: 0;">☕</span>
+            <span style="font-size: 0.7rem; font-weight: 700; color: #10b981; text-transform: uppercase; letter-spacing: 0.05em; background: rgba(16, 185, 129, 0.1); padding: 0.15rem 0.4rem; border-radius: 4px;">Active</span>
+          </div>
           <span class="currently-title">Java &amp; Spring Boot Applications</span>
         </div>
         <div class="currently-card">
-          <span class="currently-icon">⚡</span>
+          <div style="display: flex; align-items: center; justify-content: space-between; width: 100%; margin-bottom: 0.5rem;">
+            <span class="currently-icon" style="margin: 0;">⚡</span>
+            <span style="font-size: 0.7rem; font-weight: 700; color: #10b981; text-transform: uppercase; letter-spacing: 0.05em; background: rgba(16, 185, 129, 0.1); padding: 0.15rem 0.4rem; border-radius: 4px;">Active</span>
+          </div>
           <span class="currently-title">Automation Tools</span>
         </div>
       </div>
@@ -1688,8 +1720,11 @@
           <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-header">
-              <span class="timeline-role">AI Product Builder</span>
-              <span class="timeline-company">OpenAI × Outskill Hackathon</span>
+              <div style="display: flex; flex-direction: column;">
+                <span class="timeline-role">AI Product Builder</span>
+                <span class="timeline-company">OpenAI × Outskill Hackathon</span>
+              </div>
+              <span style="font-size: 0.85rem; color: #a78bfa; font-weight: 600; margin-left: auto;">📅 May 2024</span>
             </div>
             <ul class="timeline-list">
               <li>Designed and built <strong>DukaanAI</strong>, an intelligent retail database management assistant.</li>
@@ -1760,6 +1795,10 @@
           <div class="edu-school">Malla Reddy College of Engineering and Technology (MRCET)</div>
           <div class="edu-degree">B.Tech in Computer Science &amp; Engineering</div>
           <div class="edu-date">📅 Batch: 2023 - 2027 | Hyderabad, India</div>
+          <div style="margin-top: 1rem; border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 0.8rem; font-size: 0.85rem; color: var(--text-muted);">
+            <strong style="color: #93c5fd; display: block; margin-bottom: 0.3rem;">Focus &amp; Coursework Highlights:</strong>
+            Data Structures &amp; Algorithms (DSA), Object-Oriented Programming (Java), Database Management Systems (DBMS), Software Engineering, AI &amp; API Integration.
+          </div>
         </div>
       </div>
     </section>
@@ -1796,15 +1835,51 @@
     <!-- Certifications Section -->
     <section id="certifications">
       <h2>Certifications</h2>
-      <div class="certifications-grid" style="grid-template-columns: 1fr;">
+      <div class="certifications-grid">
         
         <!-- OpenAI Hackathon Participation -->
-        <a href="https://github.com/eslavathnarasimhanaik" target="_blank" class="cert-card" style="max-width: 500px; margin: 0 auto; width: 100%;">
+        <a href="https://github.com/eslavathnarasimhanaik" target="_blank" class="cert-card">
           <div class="cert-meta">
             <span class="cert-badge-icon">🏆</span>
             <div>
               <div class="cert-title">OpenAI Builders Hackathon Certificate</div>
               <div class="cert-issuer">OpenAI × Outskill AI Builders</div>
+            </div>
+          </div>
+          <span class="cert-arrow">→</span>
+        </a>
+
+        <!-- AWS APAC Cert -->
+        <a href="https://github.com/eslavathnarasimhanaik" target="_blank" class="cert-card">
+          <div class="cert-meta">
+            <span class="cert-badge-icon">☁️</span>
+            <div>
+              <div class="cert-title">AWS APAC – Solutions Architecture</div>
+              <div class="cert-issuer">Simplilearn</div>
+            </div>
+          </div>
+          <span class="cert-arrow">→</span>
+        </a>
+
+        <!-- Generative AI Cert -->
+        <a href="https://github.com/eslavathnarasimhanaik" target="_blank" class="cert-card">
+          <div class="cert-meta">
+            <span class="cert-badge-icon">🤖</span>
+            <div>
+              <div class="cert-title">Generative AI: Prompt Engineering Basics</div>
+              <div class="cert-issuer">Simplilearn</div>
+            </div>
+          </div>
+          <span class="cert-arrow">→</span>
+        </a>
+
+        <!-- Accenture Job Simulation -->
+        <a href="https://github.com/eslavathnarasimhanaik" target="_blank" class="cert-card">
+          <div class="cert-meta">
+            <span class="cert-badge-icon">📊</span>
+            <div>
+              <div class="cert-title">Data Analytics &amp; Visualization Job Simulation</div>
+              <div class="cert-issuer">Accenture North America | Forage</div>
             </div>
           </div>
           <span class="cert-arrow">→</span>
