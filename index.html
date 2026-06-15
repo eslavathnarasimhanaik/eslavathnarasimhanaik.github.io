@@ -12,6 +12,27 @@
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://eslavathnarasimhanaik.github.io/" />
 
+  <!-- Google Analytics (GA4) - Resume Download Event Tracking -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const resumeBtn = document.getElementById('btn-resume');
+      if (resumeBtn) {
+        resumeBtn.addEventListener('click', () => {
+          gtag('event', 'download_resume', {
+            'event_category': 'Engagement',
+            'event_label': 'Eslavath_Narasimha_Naik_Resume.pdf'
+          });
+        });
+      }
+    });
+  </script>
+
   <!-- Google Search Console Verification -->
   <meta name="google-site-verification" content="FW7rcxi_mwc3X5nxhlJqMHrgi2c0XjySaZqLthbYjjE" />
   <meta name="google-site-verification" content="ad5xSF75uh-eU1Bq95IE2SqvErlO_qvwZWoad6x56-o" />
