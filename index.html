@@ -52,83 +52,6 @@
   <meta name="geo.position" content="17.554019;80.617638" />
   <meta name="ICBM" content="17.554019, 80.617638" />
 
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-   <link rel="preconnect" href="https://api.github.com">
-   <style>
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 300;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuOKfMZg.ttf) format('truetype');
-}
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfMZg.ttf) format('truetype');
-}
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuI6fMZg.ttf) format('truetype');
-}
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuGKYMZg.ttf) format('truetype');
-}
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuFuYMZg.ttf) format('truetype');
-}
-@font-face {
-  font-family: 'Outfit';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/outfit/v15/QGYyz_MVcBeNP4NjuGObqx1XmO1I4TC1C4E.ttf) format('truetype');
-}
-@font-face {
-  font-family: 'Outfit';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/outfit/v15/QGYyz_MVcBeNP4NjuGObqx1XmO1I4QK1C4E.ttf) format('truetype');
-}
-@font-face {
-  font-family: 'Outfit';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/outfit/v15/QGYyz_MVcBeNP4NjuGObqx1XmO1I4e6yC4E.ttf) format('truetype');
-}
-@font-face {
-  font-family: 'Outfit';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/outfit/v15/QGYyz_MVcBeNP4NjuGObqx1XmO1I4deyC4E.ttf) format('truetype');
-}
-@font-face {
-  font-family: 'Outfit';
-  font-style: normal;
-  font-weight: 800;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/outfit/v15/QGYyz_MVcBeNP4NjuGObqx1XmO1I4bCyC4E.ttf) format('truetype');
-}
-   </style>
-
   <!-- AEO Structured Data (JSON-LD Graph Schema) -->
   <script type="application/ld+json">
   {
@@ -260,8 +183,8 @@
       --accent-primary-glow: rgba(59, 130, 246, 0.15);
       --accent-secondary: #10b981;
       --accent-tertiary: #8b5cf6;
-      --font-heading: 'Outfit', sans-serif;
-      --font-body: 'Inter', sans-serif;
+      --font-heading: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+      --font-body: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
     }
 
     * {
@@ -1370,7 +1293,9 @@
      sizes="(max-width: 640px) 100px, 200px"
      alt="Eslavath Narasimha Naik"
      class="avatar"
-     loading="lazy" />
+     loading="eager"
+     fetchpriority="high"
+     decoding="async" />
       </div>
       <h1>Eslavath Narasimha Naik</h1>
       <div class="headline">🚀 AI Engineer | Java Backend Developer | Full-Stack Developer</div>
@@ -2112,34 +2037,57 @@
       const gitReposEl = document.getElementById("git-repos");
       const snapReposEl = document.getElementById("snap-repos");
       const repoCard = document.getElementById("git-repos-card");
+      const githubSection = document.getElementById("github");
+      let hasLoadedGitHubStats = false;
 
-      // Set loading state
-      repoCard.classList.add("loading");
+      function loadGitHubStats() {
+        if (hasLoadedGitHubStats) return;
+        hasLoadedGitHubStats = true;
+        repoCard.classList.add("loading");
 
-      fetch(`https://api.github.com/users/${gitUsername}`)
-        .then(response => {
-          if (!response.ok) {
-            throw new Error("API rate limit exceeded or offline");
+        fetch(`https://api.github.com/users/${gitUsername}`)
+          .then(response => {
+            if (!response.ok) {
+              throw new Error("API rate limit exceeded or offline");
+            }
+            return response.json();
+          })
+          .then(data => {
+            if (data.public_repos !== undefined) {
+              gitReposEl.textContent = data.public_repos;
+              snapReposEl.textContent = data.public_repos;
+            }
+          })
+          .catch(err => {
+            console.warn("GitHub live API failed. Loading cached static metrics...", err);
+            gitReposEl.textContent = "26";
+            snapReposEl.textContent = "26+";
+          })
+          .finally(() => {
+            repoCard.classList.remove("loading");
+          });
+      }
+
+      function scheduleGitHubStats() {
+        if ("requestIdleCallback" in window) {
+          window.requestIdleCallback(loadGitHubStats, { timeout: 4000 });
+          return;
+        }
+        window.setTimeout(loadGitHubStats, 1200);
+      }
+
+      if ("IntersectionObserver" in window && githubSection) {
+        const observer = new IntersectionObserver(entries => {
+          if (entries.some(entry => entry.isIntersecting)) {
+            observer.disconnect();
+            scheduleGitHubStats();
           }
-          return response.json();
-        })
-        .then(data => {
-          // Remove loading state
-          repoCard.classList.remove("loading");
+        }, { rootMargin: "300px 0px" });
 
-          // Update metrics
-          if (data.public_repos !== undefined) {
-            gitReposEl.textContent = data.public_repos;
-            snapReposEl.textContent = data.public_repos;
-          }
-        })
-        .catch(err => {
-          console.warn("GitHub live API failed. Loading cached static metrics...", err);
-          // Fallback to cached assets without loaders
-          repoCard.classList.remove("loading");
-          gitReposEl.textContent = "26";
-          snapReposEl.textContent = "26+";
-        });
+        observer.observe(githubSection);
+      } else {
+        scheduleGitHubStats();
+      }
     });
   </script>
 </body>
