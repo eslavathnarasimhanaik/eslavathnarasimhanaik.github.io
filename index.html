@@ -18,27 +18,10 @@
   <meta name="author" content="Eslavath Narasimha Naik" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://eslavathnarasimhanaik.github.io/" />
+  <meta http-equiv="Cache-Control" content="max-age=31536000" />
 
-  <!-- Google Analytics (GA4) - Resume Download Event Tracking -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-N3WDQ8BBVM"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-N3WDQ8BBVM');
 
-    document.addEventListener('DOMContentLoaded', () => {
-      const resumeBtn = document.getElementById('btn-resume');
-      if (resumeBtn) {
-        resumeBtn.addEventListener('click', () => {
-          gtag('event', 'download_resume', {
-            'event_category': 'Engagement',
-            'event_label': 'Eslavath_Narasimha_Naik_Resume.pdf'
-          });
-        });
-      }
-    });
-  </script>
+
 
   <!-- Google Search Console Verification -->
   <meta name="google-site-verification" content="FW7rcxi_mwc3X5nxhlJqMHrgi2c0XjySaZqLthbYjjE" />
@@ -71,8 +54,80 @@
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link rel="preconnect" href="https://api.github.com">
+   <style>
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/inter/v20/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuOKfMZg.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/inter/v20/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfMZg.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/inter/v20/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuI6fMZg.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/inter/v20/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuGKYMZg.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/inter/v20/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuFuYMZg.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/outfit/v15/QGYyz_MVcBeNP4NjuGObqx1XmO1I4TC1C4E.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/outfit/v15/QGYyz_MVcBeNP4NjuGObqx1XmO1I4QK1C4E.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/outfit/v15/QGYyz_MVcBeNP4NjuGObqx1XmO1I4e6yC4E.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/outfit/v15/QGYyz_MVcBeNP4NjuGObqx1XmO1I4deyC4E.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/outfit/v15/QGYyz_MVcBeNP4NjuGObqx1XmO1I4bCyC4E.ttf) format('truetype');
+}
+   </style>
 
   <!-- AEO Structured Data (JSON-LD Graph Schema) -->
   <script type="application/ld+json">
@@ -417,9 +472,9 @@
     }
 
     .btn-primary {
-      background: var(--accent-primary);
+      background: #1e3a8a; /* darker blue for higher contrast */
       color: #ffffff;
-      border: 1px solid var(--accent-primary);
+      border: 1px solid #1e3a8a;
       box-shadow: 0 4px 15px rgba(59, 130, 246, 0.25);
     }
 
@@ -432,7 +487,7 @@
 
     .btn-outline {
       background: rgba(255, 255, 255, 0.04);
-      color: #f3f4f6;
+      color: #ffffff;
       border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
@@ -1308,7 +1363,14 @@
     <header>
       <div class="badge-opportunities">Open to AI Engineer &amp; Full-Stack Roles</div>
       <div class="avatar-wrapper">
-        <img src="https://avatars.githubusercontent.com/u/164381248?v=4" alt="Eslavath Narasimha Naik" class="avatar" />
+        <img src="https://avatars.githubusercontent.com/u/164381248?v=4"
+     srcset="https://avatars.githubusercontent.com/u/164381248?v=4&s=100 100w,
+             https://avatars.githubusercontent.com/u/164381248?v=4&s=200 200w,
+             https://avatars.githubusercontent.com/u/164381248?v=4&s=400 400w"
+     sizes="(max-width: 640px) 100px, 200px"
+     alt="Eslavath Narasimha Naik"
+     class="avatar"
+     loading="lazy" />
       </div>
       <h1>Eslavath Narasimha Naik</h1>
       <div class="headline">🚀 AI Engineer | Java Backend Developer | Full-Stack Developer</div>
