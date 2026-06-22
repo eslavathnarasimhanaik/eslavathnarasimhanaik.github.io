@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>Eslavath Narasimha Naik | Technical Writing</title>
+  <link>https://eslavathnarasimhanaik.github.io/</link>
+  <description>Technical articles on Java, Spring Boot, REST APIs, and OpenAI integrations by Eslavath Narasimha Naik.</description>
+  <language>en-us</language>
+  <lastBuildDate>Sun, 21 Jun 2026 00:00:00 EST</lastBuildDate>
+  <atom:link href="https://eslavathnarasimhanaik.github.io/rss.xml" rel="self" type="application/rss+xml" />
+  <item>
+    <title>Securing Spring Boot microservices with stateless JWT tokens</title>
+    <link>https://eslavathnarasimhanaik.github.io/#technical-writing</link>
+    <description>Learn how to implement stateless JSON Web Token (JWT) authentication in Java and Spring Boot security filters.</description>
+    <guid>https://eslavathnarasimhanaik.github.io/#jwt-auth</guid>
+    <pubDate>Sun, 21 Jun 2026 00:00:00 EST</pubDate>
+  </item>
+  <item>
+    <title>Integrating OpenAI API JSON Mode in Java/Spring Boot</title>
+    <link>https://eslavathnarasimhanaik.github.io/#technical-writing</link>
+    <description>How to map natural language queries into valid database transaction commands using structured JSON schemas and HTTP request pipelines.</description>
+    <guid>https://eslavathnarasimhanaik.github.io/#openai-json</guid>
+    <pubDate>Sun, 21 Jun 2026 00:00:00 EST</pubDate>
+  </item>
+  <item>
+    <title>React.js State Management &amp; Hook Best Practices</title>
+    <link>https://eslavathnarasimhanaik.github.io/#technical-writing</link>
+    <description>Practical guide for freshers on handling hooks like useEffect, managing complex state objects, and building fast custom renders.</description>
+    <guid>https://eslavathnarasimhanaik.github.io/#react-state</guid>
+    <pubDate>Sun, 21 Jun 2026 00:00:00 EST</pubDate>
+  </item>
+  <item>
+    <title>Dockerizing full-stack Spring Boot and MongoDB projects</title>
+    <link>https://eslavathnarasimhanaik.github.io/#technical-writing</link>
+    <description>Step-by-step documentation on containerizing full-stack builds with Dockerfiles, config volumes, and docker-compose configurations.</description>
+    <guid>https://eslavathnarasimhanaik.github.io/#docker-spring</guid>
+    <pubDate>Sun, 21 Jun 2026 00:00:00 EST</pubDate>
+  </item>
+</channel>
+</rss>
