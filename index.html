@@ -3122,9 +3122,13 @@
       const contactForm = document.getElementById("contact-form");
       const formStatus = document.getElementById("form-status");
 
-      // Set this to true when running the local Spring Boot + MySQL backend server
+      // Set this to true when running the Spring Boot backend
       const USE_LOCAL_MYSQL_BACKEND = true;
-      const LOCAL_BACKEND_URL = "http://localhost:8080/api/contact";
+      // Dynamically use live Render URL when hosted on github.io, otherwise localhost
+      const BACKEND_BASE_URL = window.location.hostname.includes("github.io")
+        ? "https://portfolio-backend-d47l.onrender.com"
+        : "http://localhost:8080";
+      const LOCAL_BACKEND_URL = `${BACKEND_BASE_URL}/api/contact`;
 
       if (contactForm) {
         contactForm.addEventListener("submit", function(ev) {
@@ -3202,7 +3206,7 @@
       // 4b. Meeting Booking Form Submission Logic
       const meetingForm = document.getElementById("meeting-form");
       const meetingStatus = document.getElementById("meeting-status");
-      const MEETING_API_URL = "http://localhost:8080/api/meetings";
+      const MEETING_API_URL = `${BACKEND_BASE_URL}/api/meetings`;
 
       if (meetingForm) {
         // Set minimum date to today
