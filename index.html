@@ -3201,6 +3201,16 @@
       if (contactForm) {
         contactForm.addEventListener("submit", function(ev) {
           ev.preventDefault();
+
+          const submitBtn = contactForm.querySelector('button[type="submit"]');
+          const inputs = contactForm.querySelectorAll('input, textarea');
+          const originalBtnText = submitBtn.innerHTML;
+
+          // Disable form and show loading state
+          submitBtn.disabled = true;
+          submitBtn.innerHTML = `<span>Sending...</span>`;
+          inputs.forEach(input => input.disabled = true);
+
           formStatus.style.display = "block";
           formStatus.style.color = "#93c5fd";
           formStatus.textContent = "Sending message...";
@@ -3230,13 +3240,18 @@
             })
             .then(data => {
               formStatus.style.color = "#34d399";
-              formStatus.textContent = "Thank you! Your message was saved directly to the MySQL database.";
+              formStatus.textContent = "Thank you! Your message was saved directly to the database.";
               contactForm.reset();
             })
             .catch(error => {
               formStatus.style.color = "#f87171";
-              formStatus.textContent = "Error: Could not connect to local MySQL database server.";
+              formStatus.textContent = "Error: Could not connect to database server. Please try again later.";
               console.error("Database connection error:", error);
+            })
+            .finally(() => {
+              submitBtn.disabled = false;
+              submitBtn.innerHTML = originalBtnText;
+              inputs.forEach(input => input.disabled = false);
             });
 
           } else {
@@ -3267,6 +3282,10 @@
             }).catch(error => {
               formStatus.style.color = "#f87171";
               formStatus.textContent = "Oops! There was a problem submitting your form.";
+            }).finally(() => {
+              submitBtn.disabled = false;
+              submitBtn.innerHTML = originalBtnText;
+              inputs.forEach(input => input.disabled = false);
             });
           }
         });
@@ -3286,6 +3305,16 @@
 
         meetingForm.addEventListener("submit", function(ev) {
           ev.preventDefault();
+
+          const submitBtn = meetingForm.querySelector('button[type="submit"]');
+          const inputs = meetingForm.querySelectorAll('input, select, textarea');
+          const originalBtnText = submitBtn.innerHTML;
+
+          // Disable form and show loading state
+          submitBtn.disabled = true;
+          submitBtn.innerHTML = `<span>Booking...</span>`;
+          inputs.forEach(input => input.disabled = true);
+
           meetingStatus.style.display = "block";
           meetingStatus.style.color = "#93c5fd";
           meetingStatus.textContent = "Booking your meeting...";
@@ -3348,8 +3377,13 @@
           })
           .catch(error => {
             meetingStatus.style.color = "#f87171";
-            meetingStatus.textContent = "❌ Error: Could not connect to booking server.";
+            meetingStatus.textContent = "❌ Error: Could not connect to booking server. Please try again later.";
             console.error("Meeting booking error:", error);
+          })
+          .finally(() => {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalBtnText;
+            inputs.forEach(input => input.disabled = false);
           });
         });
       }
