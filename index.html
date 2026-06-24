@@ -1744,6 +1744,44 @@
     body.light-mode h3 {
       color: #0f172a !important;
     }
+    
+    /* GitHub Live Activity Feed Styles */
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    @keyframes pulse {
+      0% { transform: scale(0.95); opacity: 0.5; }
+      50% { transform: scale(1.15); opacity: 1; }
+      100% { transform: scale(0.95); opacity: 0.5; }
+    }
+    .pulse-dot {
+      animation: pulse 2s infinite ease-in-out;
+    }
+    .github-chart-container::-webkit-scrollbar {
+      height: 6px;
+    }
+    .github-chart-container::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 10px;
+    }
+    .github-chart-container::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+    }
+    .github-chart-container::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    body.light-mode .github-chart-container::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.02);
+    }
+    body.light-mode .github-chart-container::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, 0.1);
+    }
+    body.light-mode .github-chart-container::-webkit-scrollbar-thumb:hover {
+      background: rgba(0, 0, 0, 0.2);
+    }
+
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         animation-duration: 0.01ms !important;
@@ -2683,17 +2721,47 @@
               </div>
             </div>
 
-            <!-- GitHub Profile Link (Real Activity) -->
+            <!-- GitHub Live Activity (Contribution Calendar & Recent Feed) -->
             <div>
               <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                <span style="font-size: 0.85rem; color: #ffffff; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">GitHub Activity</span>
+                <span style="font-size: 0.85rem; color: #ffffff; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">GitHub Activity Calendar</span>
+                <a href="https://github.com/eslavathnarasimhanaik" target="_blank" style="font-size: 0.75rem; color: #60a5fa; text-decoration: none; font-weight: 600;" onmouseover="this.style.textDecoration='underline';" onmouseout="this.style.textDecoration='none';">View Profile ↗</a>
               </div>
-              <a href="https://github.com/eslavathnarasimhanaik" target="_blank" style="text-decoration: none; display: block; background: rgba(8, 11, 17, 0.4); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 1.5rem; text-align: center; transition: border-color 0.3s, transform 0.3s;" onmouseover="this.style.borderColor='rgba(59,130,246,0.3)'; this.style.transform='translateY(-2px)';" onmouseout="this.style.borderColor='rgba(255,255,255,0.05)'; this.style.transform='translateY(0)';">
-                <div style="font-size: 2rem; margin-bottom: 0.5rem;">🐙</div>
-                <div style="font-size: 1rem; font-weight: 700; color: #60a5fa; margin-bottom: 0.3rem;">View Real GitHub Activity</div>
-                <div style="font-size: 0.8rem; color: var(--text-muted);">github.com/eslavathnarasimhanaik</div>
-                <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.8rem; font-style: italic;">Live contribution graph, repositories, and commit history →</div>
-              </a>
+              <div style="background: rgba(8, 11, 17, 0.4); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 1.25rem; overflow: hidden;">
+                <!-- Contribution Graph SVG Container -->
+                <div class="github-chart-container" style="overflow-x: auto; width: 100%; display: flex; justify-content: flex-start; padding-bottom: 0.5rem; -webkit-overflow-scrolling: touch;">
+                  <img src="https://ghchart.rshah.org/3b82f6/eslavathnarasimhanaik" alt="Eslavath Narasimha Naik's GitHub Contribution Chart" style="max-width: 100%; height: auto; min-width: 680px; filter: drop-shadow(0px 2px 8px rgba(0,0,0,0.3));" loading="lazy" />
+                </div>
+                <!-- Legend & Instructions -->
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.75rem; font-size: 0.75rem; color: var(--text-muted); flex-wrap: wrap; gap: 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.04); padding-bottom: 0.75rem;">
+                  <span>Live contribution graph from open source contributions</span>
+                  <div style="display: flex; align-items: center; gap: 0.3rem;">
+                    <span>Less</span>
+                    <span style="display: inline-block; width: 10px; height: 10px; background: rgba(255, 255, 255, 0.05); border-radius: 2px;"></span>
+                    <span style="display: inline-block; width: 10px; height: 10px; background: rgba(59, 130, 246, 0.2); border-radius: 2px;"></span>
+                    <span style="display: inline-block; width: 10px; height: 10px; background: rgba(59, 130, 246, 0.55); border-radius: 2px;"></span>
+                    <span style="display: inline-block; width: 10px; height: 10px; background: rgba(59, 130, 246, 0.8); border-radius: 2px;"></span>
+                    <span style="display: inline-block; width: 10px; height: 10px; background: #3b82f6; border-radius: 2px;"></span>
+                    <span>More</span>
+                  </div>
+                </div>
+
+                <!-- Recent Live Feed Sub-section -->
+                <div style="margin-top: 0.75rem;">
+                  <div style="font-size: 0.75rem; color: #ffffff; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.4rem;">
+                    <span class="pulse-dot" style="width: 8px; height: 8px; background: #10b981; border-radius: 50%; display: inline-block; box-shadow: 0 0 8px #10b981;"></span>
+                    <span>Recent Live Feed</span>
+                  </div>
+                  <div id="github-activity-feed" style="display: flex; flex-direction: column; gap: 0.3rem; min-height: 80px; justify-content: center;">
+                    <!-- Loading State -->
+                    <div id="github-feed-loading" style="text-align: center; color: var(--text-muted); font-size: 0.8rem; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; padding: 0.8rem 0;">
+                      <div class="spinner" style="width: 16px; height: 16px; border: 2px solid rgba(255,255,255,0.1); border-top-color: #60a5fa; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+                      <span>Fetching latest activities...</span>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
             </div>
           </div>
         </div>
@@ -3368,9 +3436,142 @@
         });
       });
 
-      // 8. GitHub contribution graph removed (was using simulated random data)
-      // Real activity is now linked directly to the GitHub profile
+      // 8. Live GitHub activity stats and events feed
+      const ghUsername = 'eslavathnarasimhanaik';
+      
+      // Fetch live repositories count
+      fetch(`https://api.github.com/users/${ghUsername}`)
+        .then(res => {
+          if (!res.ok) throw new Error('Failed to fetch user data');
+          return res.json();
+        })
+        .then(data => {
+          if (data && data.public_repos !== undefined) {
+            const snapRepos = document.getElementById('snap-repos');
+            const activeRepos = document.getElementById('github-repo-count-active');
+            if (snapRepos) snapRepos.textContent = `${data.public_repos}+`;
+            if (activeRepos) activeRepos.textContent = `${data.public_repos}+`;
+          }
+        })
+        .catch(err => console.error('Error fetching GitHub profile data:', err));
 
+      // Fetch live events feed
+      const feedContainer = document.getElementById('github-activity-feed');
+      if (feedContainer) {
+        fetch(`https://api.github.com/users/${ghUsername}/events/public`)
+          .then(res => {
+            if (!res.ok) throw new Error('Failed to fetch events');
+            return res.json();
+          })
+          .then(events => {
+            const loadingEl = document.getElementById('github-feed-loading');
+            if (loadingEl) loadingEl.remove();
+            
+            if (!events || events.length === 0) {
+              feedContainer.innerHTML = '<div style="text-align: center; color: var(--text-muted); font-size: 0.85rem; padding: 1.5rem 0;">No recent public activity.</div>';
+              return;
+            }
+            
+            const maxEvents = 3;
+            let count = 0;
+            const fragment = document.createDocumentFragment();
+            
+            for (const event of events) {
+              if (count >= maxEvents) break;
+              
+              let eventText = '';
+              let eventIcon = '🔨';
+              const repoName = event.repo ? event.repo.name.replace(`${ghUsername}/`, '') : '';
+              const repoUrl = `https://github.com/${event.repo ? event.repo.name : ''}`;
+              
+              switch(event.type) {
+                case 'PushEvent':
+                  const commitMsg = event.payload.commits && event.payload.commits[0] 
+                    ? event.payload.commits[0].message 
+                    : 'commit';
+                  const commitCount = event.payload.size || 1;
+                  eventText = `Pushed ${commitCount} commit${commitCount > 1 ? 's' : ''}: "${commitMsg}" to <a href="${repoUrl}" target="_blank" style="color: #60a5fa; text-decoration: none; font-weight: 600;" onmouseover="this.style.textDecoration='underline';" onmouseout="this.style.textDecoration='none';">${repoName}</a>`;
+                  eventIcon = '💻';
+                  break;
+                case 'CreateEvent':
+                  const refType = event.payload.ref_type || 'repository';
+                  eventText = `Created ${refType} <a href="${repoUrl}" target="_blank" style="color: #60a5fa; text-decoration: none; font-weight: 600;" onmouseover="this.style.textDecoration='underline';" onmouseout="this.style.textDecoration='none';">${repoName}</a>`;
+                  eventIcon = '📁';
+                  break;
+                case 'PullRequestEvent':
+                  const prAction = event.payload.action || 'opened';
+                  const prTitle = event.payload.pull_request ? event.payload.pull_request.title : 'pull request';
+                  eventText = `${prAction.charAt(0).toUpperCase() + prAction.slice(1)} pull request: "${prTitle}" in <a href="${repoUrl}" target="_blank" style="color: #60a5fa; text-decoration: none; font-weight: 600;" onmouseover="this.style.textDecoration='underline';" onmouseout="this.style.textDecoration='none';">${repoName}</a>`;
+                  eventIcon = '🔀';
+                  break;
+                case 'IssuesEvent':
+                  const issueAction = event.payload.action || 'opened';
+                  const issueTitle = event.payload.issue ? event.payload.issue.title : 'issue';
+                  eventText = `${issueAction.charAt(0).toUpperCase() + issueAction.slice(1)} issue: "${issueTitle}" in <a href="${repoUrl}" target="_blank" style="color: #60a5fa; text-decoration: none; font-weight: 600;" onmouseover="this.style.textDecoration='underline';" onmouseout="this.style.textDecoration='none';">${repoName}</a>`;
+                  eventIcon = '⚠️';
+                  break;
+                case 'WatchEvent':
+                  eventText = `Starred <a href="${repoUrl}" target="_blank" style="color: #60a5fa; text-decoration: none; font-weight: 600;" onmouseover="this.style.textDecoration='underline';" onmouseout="this.style.textDecoration='none';">${repoName}</a>`;
+                  eventIcon = '⭐';
+                  break;
+                default:
+                  continue;
+              }
+              
+              const eventDate = new Date(event.created_at);
+              const timeString = formatRelativeTime(eventDate);
+              
+              const item = document.createElement('div');
+              item.style.display = 'flex';
+              item.style.gap = '0.75rem';
+              item.style.alignItems = 'flex-start';
+              item.style.fontSize = '0.85rem';
+              item.style.padding = '0.5rem 0';
+              if (count < maxEvents - 1) {
+                item.style.borderBottom = '1px solid rgba(255,255,255,0.03)';
+              }
+              
+              item.innerHTML = `
+                <span style="font-size: 1.1rem; line-height: 1.2;">${eventIcon}</span>
+                <div style="flex: 1; color: var(--text-muted); line-height: 1.4;">
+                  <span style="color: #e2e8f0;">${eventText}</span>
+                  <span style="display: block; font-size: 0.75rem; color: #64748b; margin-top: 0.15rem;">${timeString}</span>
+                </div>
+              `;
+              
+              fragment.appendChild(item);
+              count++;
+            }
+            
+            if (count === 0) {
+              feedContainer.innerHTML = '<div style="text-align: center; color: var(--text-muted); font-size: 0.85rem; padding: 1.5rem 0;">No recent public activity.</div>';
+            } else {
+              feedContainer.appendChild(fragment);
+            }
+          })
+          .catch(err => {
+            console.error('Error fetching GitHub events:', err);
+            const loadingEl = document.getElementById('github-feed-loading');
+            if (loadingEl) {
+              loadingEl.innerHTML = '<span style="color: #ef4444; font-size: 0.85rem;">Failed to load live feed.</span>';
+            }
+          });
+      }
+
+      function formatRelativeTime(date) {
+        const now = new Date();
+        const diffMs = now - date;
+        const diffSecs = Math.floor(diffMs / 1000);
+        const diffMins = Math.floor(diffSecs / 60);
+        const diffHours = Math.floor(diffMins / 60);
+        const diffDays = Math.floor(diffHours / 24);
+        
+        if (diffSecs < 60) return 'just now';
+        if (diffMins < 60) return `${diffMins}m ago`;
+        if (diffHours < 24) return `${diffHours}h ago`;
+        if (diffDays === 1) return 'yesterday';
+        return `${diffDays} days ago`;
+      }
     });
   </script>
 </body>
