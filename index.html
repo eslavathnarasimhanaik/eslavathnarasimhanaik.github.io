@@ -2967,8 +2967,8 @@
 
           <div style="border-top: 1px solid rgba(255, 255, 255, 0.06); padding-top: 1rem; margin-top: 1rem;">
             <span style="font-size: 0.75rem; font-weight: 600; color: var(--text-muted); text-align: center; display: block; margin-bottom: 0.5rem;">Or schedule directly via</span>
-            <a href="https://calendly.com/eslavathnarasimhanaik" target="_blank" class="btn btn-primary" style="width: 100%; justify-content: center; background: rgba(99, 102, 241, 0.15); border: 1px solid rgba(99, 102, 241, 0.3); font-size: 0.85rem;" aria-label="Schedule meeting via Calendly">
-              <span>📆 Calendly</span>
+            <a href="https://calendar.google.com/calendar/u/0/appointments/schedules/" target="_blank" class="btn btn-primary" style="width: 100%; justify-content: center; background: rgba(59, 130, 246, 0.15); border: 1px solid rgba(59, 130, 246, 0.3); font-size: 0.85rem;" aria-label="Schedule meeting via Google Calendar" onmouseover="this.style.background='rgba(59, 130, 246, 0.25)';" onmouseout="this.style.background='rgba(59, 130, 246, 0.15)';">
+              <span>📅 Google Calendar Schedule</span>
             </a>
           </div>
 
@@ -3315,7 +3315,35 @@
           })
           .then(data => {
             meetingStatus.style.color = "#34d399";
-            meetingStatus.textContent = "✅ Meeting booked! Booking ID: #" + data.data.id + " — Status: " + data.data.status;
+            
+            const isGoogleEmail = jsonData.email.toLowerCase().endsWith('@gmail.com');
+            if (isGoogleEmail) {
+              meetingStatus.textContent = "✅ Saved to DB! Opening Google Calendar to automatically book Google Meet and invite you...";
+              
+              const dateParts = jsonData.preferredDate.split('-'); // [YYYY, MM, DD]
+              const timeParts = jsonData.preferredTime.split(':'); // [HH, MM]
+              const startDateTime = new Date(dateParts[0], dateParts[1] - 1, dateParts[2], timeParts[0], timeParts[1]);
+              const endDateTime = new Date(startDateTime.getTime() + 30 * 60 * 1000); // 30 mins duration
+
+              const formatToGCalISO = (dt) => {
+                return dt.toISOString().replace(/-|:|\.\d\d\d/g, "");
+              };
+
+              const gcalStart = formatToGCalISO(startDateTime);
+              const gcalEnd = formatToGCalISO(endDateTime);
+
+              const gcalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE` +
+                `&text=${encodeURIComponent('Meeting with Eslavath Narasimha Naik: ' + jsonData.topic)}` +
+                `&dates=${gcalStart}/${gcalEnd}` +
+                `&details=${encodeURIComponent('Hi ' + jsonData.name + ',\n\nThanks for booking a meeting. Topic: ' + jsonData.topic + '\n\nThis meeting is scheduled to use Google Meet. Please save this event to your calendar to automatically create the Google Meet link and invite both of us.')}` +
+                `&add=${encodeURIComponent('narasimhanaik591@gmail.com,' + jsonData.email)}`;
+
+              setTimeout(() => {
+                window.open(gcalUrl, '_blank');
+              }, 1500);
+            } else {
+              meetingStatus.textContent = "✅ Booking saved! Booking ID: #" + data.data.id + " — (Use a Gmail account next time to automatically book Google Meet)";
+            }
             meetingForm.reset();
           })
           .catch(error => {
