@@ -118,11 +118,14 @@
       --shadow-premium: 0 10px 30px rgba(15, 23, 42, 0.06);
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      scroll-behavior: smooth;
     }
 
     body {
@@ -3101,23 +3104,48 @@
       const sections = document.querySelectorAll("section");
       const anims = document.querySelectorAll(".animate-on-scroll");
 
-      // Active state spy function
-      function activeSpy() {
-        let current = "";
-        sections.forEach(section => {
-          const sectionTop = section.offsetTop;
-          const sectionHeight = section.clientHeight;
-          if (window.scrollY >= sectionTop - 160) {
-            current = section.getAttribute("id");
-          }
+      // Performant active section spy using IntersectionObserver
+      if ("IntersectionObserver" in window) {
+        const spyObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const currentId = entry.target.getAttribute("id");
+              navLinks.forEach(link => {
+                if (link.getAttribute("href") === `#${currentId}`) {
+                  link.classList.add("active");
+                } else {
+                  link.classList.remove("active");
+                }
+              });
+            }
+          });
+        }, {
+          // Trigger when a section occupies the center-to-top portion of the viewport
+          rootMargin: "-25% 0px -55% 0px",
+          threshold: 0
         });
 
-        navLinks.forEach(link => {
-          link.classList.remove("active");
-          if (link.getAttribute("href") === `#${current}`) {
-            link.classList.add("active");
-          }
-        });
+        sections.forEach(section => spyObserver.observe(section));
+      } else {
+        // Fallback for older browsers
+        function activeSpy() {
+          let current = "";
+          sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            if (window.scrollY >= sectionTop - 160) {
+              current = section.getAttribute("id");
+            }
+          });
+
+          navLinks.forEach(link => {
+            link.classList.remove("active");
+            if (link.getAttribute("href") === `#${current}`) {
+              link.classList.add("active");
+            }
+          });
+        }
+        window.addEventListener("scroll", activeSpy);
+        activeSpy();
       }
 
       // Intersection observer for fading up sections
@@ -3135,9 +3163,6 @@
       } else {
         anims.forEach(anim => anim.classList.add("visible"));
       }
-
-      window.addEventListener("scroll", activeSpy);
-      activeSpy(); // initial invoke
 
       // 3. Dynamic GitHub Repos Fetching Logic
       const gitUsername = "eslavathnarasimhanaik";
