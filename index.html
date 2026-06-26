@@ -3196,14 +3196,14 @@
           })
           .then(data => {
             if (data.public_repos !== undefined) {
-              snapReposEl.textContent = data.public_repos + "+";
+              if (snapReposEl) snapReposEl.textContent = data.public_repos + "+";
               const activeCountEl = document.getElementById("github-repo-count-active");
               if (activeCountEl) activeCountEl.textContent = data.public_repos + "+";
             }
           })
           .catch(err => {
             console.warn("Cached fallback repo count loaded.", err);
-            snapReposEl.textContent = "29+";
+            if (snapReposEl) snapReposEl.textContent = "29+";
             const activeCountEl = document.getElementById("github-repo-count-active");
             if (activeCountEl) activeCountEl.textContent = "29+";
           })
