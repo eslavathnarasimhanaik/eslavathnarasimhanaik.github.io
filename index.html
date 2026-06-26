@@ -48,6 +48,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
+  <!-- Preload critical above-the-fold assets and preconnect to third parties for faster loading / SEO -->
+  <link rel="preload" as="image" href="profile-avatar.jpg">
+  <link rel="preconnect" href="https://ghchart.rshah.org">
+
   <!-- Structured Data (JSON-LD) -->
   <script type="application/ld+json">
   {
@@ -1835,8 +1839,8 @@
     <section id="identity" class="hero-wrapper">
       <div class="badge-opportunities">🟢 Available for Internships • Freelance Projects • 2027 Graduate Opportunities</div>
       <div class="avatar-wrapper">
-        <!-- Render existing profile-avatar.jpg with fallback text EN on error -->
-        <img src="profile-avatar.jpg" alt="Eslavath Narasimha Naik" class="avatar" id="avatar-img" loading="lazy" onerror="this.style.display='none'; document.getElementById('avatar-text-fallback').style.display='flex';" />
+        <!-- Render existing profile-avatar.jpg with fallback text EN on error (loading eager for LCP / SEO) -->
+        <img src="profile-avatar.jpg" alt="Eslavath Narasimha Naik" class="avatar" id="avatar-img" loading="eager" onerror="this.style.display='none'; document.getElementById('avatar-text-fallback').style.display='flex';" />
         <div class="avatar avatar-fallback" id="avatar-text-fallback">EN</div>
       </div>
       <h1>Eslavath Narasimha Naik</h1>
@@ -3060,6 +3064,8 @@
   <!-- Interactive Control Scripts -->
   <script>
     document.addEventListener("DOMContentLoaded", function() {
+      // Detect search engine bots to avoid blocking API fetches and improve SEO rendering
+      const isBot = /bot|googlebot|crawler|spider|robot|crawling/i.test(navigator.userAgent);
       
       // Experience tab switching function
       window.switchExpTab = function(tabId) {
@@ -3149,7 +3155,10 @@
       }
 
       // Intersection observer for fading up sections
-      if ("IntersectionObserver" in window) {
+      if (isBot) {
+        // Immediately make all animated sections visible for crawlers/search bots
+        anims.forEach(anim => anim.classList.add("visible"));
+      } else if ("IntersectionObserver" in window) {
         const obs = new IntersectionObserver((entries) => {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -3170,7 +3179,16 @@
       const repoCard = document.getElementById("git-repos-card");
       
       function loadGitHubStats() {
-        repoCard.style.opacity = "0.75";
+        if (isBot) {
+          // Immediately load cached/fallback repo count for bots without making XHR requests
+          if (snapReposEl) snapReposEl.textContent = "29+";
+          const activeCountEl = document.getElementById("github-repo-count-active");
+          if (activeCountEl) activeCountEl.textContent = "29+";
+          if (repoCard) repoCard.style.opacity = "1";
+          return;
+        }
+        
+        if (repoCard) repoCard.style.opacity = "0.75";
         fetch(`https://api.github.com/users/${gitUsername}`)
           .then(res => {
             if (!res.ok) throw new Error("API Limit reached");
@@ -3190,12 +3208,14 @@
             if (activeCountEl) activeCountEl.textContent = "29+";
           })
           .finally(() => {
-            repoCard.style.opacity = "1";
+            if (repoCard) repoCard.style.opacity = "1";
           });
       }
 
       // Load when user scrolls near hero/stats
-      if ("IntersectionObserver" in window) {
+      if (isBot) {
+        loadGitHubStats();
+      } else if ("IntersectionObserver" in window) {
         const observer = new IntersectionObserver(entries => {
           if (entries.some(entry => entry.isIntersecting)) {
             observer.disconnect();
@@ -3639,18 +3659,23 @@
       }
 
       if (feedContainer) {
-        fetch(`https://api.github.com/users/${ghUsername}/events/public`)
-          .then(res => {
-            if (!res.ok) throw new Error('Failed to fetch events');
-            return res.json();
-          })
-          .then(events => {
-            renderEvents(events);
-          })
-          .catch(err => {
-            console.warn('Error fetching live GitHub events, loading fallback feed:', err);
-            renderEvents(fallbackEvents);
-          });
+        if (isBot) {
+          // Immediately load fallback/cached events for bots to avoid failing XHR fetches
+          renderEvents(fallbackEvents);
+        } else {
+          fetch(`https://api.github.com/users/${ghUsername}/events/public`)
+            .then(res => {
+              if (!res.ok) throw new Error('Failed to fetch events');
+              return res.json();
+            })
+            .then(events => {
+              renderEvents(events);
+            })
+            .catch(err => {
+              console.warn('Error fetching live GitHub events, loading fallback feed:', err);
+              renderEvents(fallbackEvents);
+            });
+        }
       }
 
       function formatRelativeTime(date) {
